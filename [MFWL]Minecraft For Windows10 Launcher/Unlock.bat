@@ -41,9 +41,10 @@ if %errorlevel%==1 (
 
 ::»ñÈ¡ÓÃ»§²Ù×÷
 :Started
-echo [0m
-sc query |find /i "ClipSVC" 
-if ERRORLEVEL 1 (echo [36m### ClipSVC ·þÎñÒÑÍ£Ö¹£¨¿ÉÄÜ´¦ÓÚ·½°¸ B µÄÒÑ½âËø×´Ì¬£©) else (echo ClipSVC ·þÎñÔËÐÐÖÐ)
+echo.
+for /f "tokens=3" %%i in ('reg query "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\ClipSVC\Parameters" /v "ServiceDll"') do (
+	if not %%i==C:\WINDOWS\System32\ClipSVC.dll (echo [36m### ´¦ÓÚ·½°¸ B µÄÒÑ½âËø×´Ì¬[0m)
+)
 if %PROCESSOR_ARCHITECTURE:~-2%==64 (set n=0) else (set n=1)
 for  /f %%i in ('certutil -hashfile %windir%\System32\Windows.ApplicationModel.Store.dll') do (
 	if %%i==a54a840771c33f2bf220a7af36d6a2747d6a7955 set /a n+=1
@@ -104,8 +105,6 @@ if %bit%==64 (
 	takeown /a /f %windir%\System32\Windows.ApplicationModel.Store.dll
 	echo »ñÈ¡ÎÄ¼þÈ¨ÏÞ...
 	icacls %windir%\System32\Windows.ApplicationModel.Store.dll /c /grant Administrators:F
-	echo ½â³ýÎÄ¼þÕ¼ÓÃ×´Ì¬...
-	taskkill /im RuntimeBroker.exe /f
 	echo ±¸·ÝÔ­ DLL...
 	rename %windir%\System32\Windows.ApplicationModel.Store.dll Windows.ApplicationModel.Store.dll.backup
 	echo Ìæ»»ÐÂ DLL...
@@ -133,8 +132,6 @@ if %bit%==64 (
 	takeown /a /f %windir%\System32\Windows.ApplicationModel.Store.dll
 	echo »ñÈ¡ÎÄ¼þÈ¨ÏÞ...
 	icacls %windir%\System32\Windows.ApplicationModel.Store.dll /c /grant Administrators:F
-	echo ½â³ýÎÄ¼þÕ¼ÓÃ×´Ì¬...
-	taskkill /im RuntimeBroker.exe /f
 	echo ±¸·ÝÔ­ DLL...
 	rename %windir%\System32\Windows.ApplicationModel.Store.dll Windows.ApplicationModel.Store.dll.backup
 	echo Ìæ»»ÐÂ DLL...
@@ -163,13 +160,8 @@ set score=0
 for /f "tokens=4-7 delims=[.] " %%i in ('ver') do @(if %%i==Version (set ver=%%j.%%k.%%l) else (set ver=%%i.%%j.%%k))
 echo µ±Ç°ÏµÍ³°æ±¾£º%ver%
 if %ver% GEQ 10.0.18362.446 (set /a score+=1) else (set /a score-=1)
-sc query |find /i "ClipSVC" 
-if ERRORLEVEL 1 (
-	set /a score-=1
-	echo ClipSVC ·þÎñÒÑÍ£Ö¹
-) else (
-	set /a score+=1
-	echo ClipSVC ·þÎñÔËÐÐÖÐ
+for /f "tokens=3" %%i in ('reg query "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\ClipSVC\Parameters" /v "ServiceDll"') do (
+	if %%i==C:\WINDOWS\System32\ClipSVC.dll (set /a score+=1) else (set /a score-=1)
 )
 if %PROCESSOR_ARCHITECTURE:~-2%==64 (set n=0) else (set n=1)
 for  /f %%i in ('certutil -hashfile %windir%\System32\Windows.ApplicationModel.Store.dll') do (
@@ -211,8 +203,6 @@ if %bit%==64 (
 	takeown /a /f %windir%\System32\Windows.ApplicationModel.Store.dll
 	echo »ñÈ¡ÎÄ¼þÈ¨ÏÞ...
 	icacls %windir%\System32\Windows.ApplicationModel.Store.dll /grant Administrators:F
-	echo ½â³ýÎÄ¼þÕ¼ÓÃ×´Ì¬...
-	taskkill /im RuntimeBroker.exe /f
 	if exist %windir%\System32\Windows.ApplicationModel.Store.dll.backup (
 		echo É¾³ýÌæ»»µÄ DLL...
 		del /f %windir%\System32\Windows.ApplicationModel.Store.dll
@@ -248,8 +238,6 @@ if %bit%==64 (
 	takeown /a /f %windir%\System32\Windows.ApplicationModel.Store.dll
 	echo »ñÈ¡ÎÄ¼þÈ¨ÏÞ...
 	icacls %windir%\System32\Windows.ApplicationModel.Store.dll /grant Administrators:F
-	echo ½â³ýÎÄ¼þÕ¼ÓÃ×´Ì¬...
-	taskkill /im RuntimeBroker.exe /f
 	if exist %windir%\System32\Windows.ApplicationModel.Store.dll.backup (
 		echo É¾³ýÌæ»»µÄ DLL...
 		del /f %windir%\System32\Windows.ApplicationModel.Store.dll
