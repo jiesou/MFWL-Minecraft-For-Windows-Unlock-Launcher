@@ -10,15 +10,6 @@ echo œ‡πÿ∑Ω∑®‘≠¿Ì¿¥◊‘Õ¯¬Á£¨±æΩ≈±æ”… jiecs_23 ÷∆◊˜
 ::ºÏ≤‚ª∑æ≥
 echo.
 echo [0mµ±«∞‘À––¬∑æ∂£∫%CD%
-echo [0mºÏ≤Èπ‹¿Ì‘±»®œﬁ...
-if exist "%SystemRoot%\SysWOW64" path %path%;%windir%\SysNative;%SystemRoot%\SysWOW64;%~dp0
-bcdedit >nul
-if not ERRORLEVEL 1 goto uacOK
-echo [31m### Œ¥ªÒ»°µΩπ‹¿Ì‘±»®œﬁ
-echo [36m### «Î ⁄”Ëπ‹¿Ì‘±»®œﬁ£®UAC£©[0m
-%1 start "" mshta vbscript:createobject("shell.application").shellexecute("""%~0""","::",,"runas",1)(window.close)&exit
-exit /B
-:uacOK
 echo [0mºÏ≤È Minecraft for Windows ◊¥Ã¨...
 tasklist |find /i "Minecraft.Windows.exe"
 if ERRORLEVEL 1 goto mcOK
@@ -60,7 +51,7 @@ if %errorlevel%==1 (
 
 ::≥ı ºΩ· ¯6¥Œ RuntimeBroker.exe Ω¯≥Ã
 :Loop
-taskkill /im RuntimeBroker.exe /f
+for /f "tokens=3,3*" %%i in ('tasklist /nh /apps /fi "IMAGENAME eq RuntimeBroker.exe" ^| find "Microsoft.MinecraftUWP"') do @taskkill /pid %%i /f
 if not ERRORLEVEL 1 (
 	echo “—Ω· ¯µ⁄%num%¥Œ RuntimeBroker.exe Ω¯≥Ã...
 	if %num% GEQ 5 goto Ok
