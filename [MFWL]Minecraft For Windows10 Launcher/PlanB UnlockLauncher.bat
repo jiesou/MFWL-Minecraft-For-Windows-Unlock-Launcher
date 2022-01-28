@@ -69,12 +69,12 @@ if %errorlevel%==1 (
 	goto Loop
 )
 
-::初始结束6次 RuntimeBroker.exe 进程
+::初始结束7次 RuntimeBroker.exe 进程
 :Loop
-for /f "tokens=3,3*" %%i in ('tasklist /nh /apps /fi "IMAGENAME eq RuntimeBroker.exe" ^| find "Microsoft.MinecraftUWP"') do @taskkill /pid %%i /f
+for /f "tokens=3" %%i in ('tasklist /nh /apps /fi "IMAGENAME eq RuntimeBroker.exe" ^| find "Microsoft.MinecraftUWP"') do @taskkill /pid %%i /f
 if not ERRORLEVEL 1 (
 	echo 已结束第%num%次 RuntimeBroker.exe 进程...
-	if %num% GEQ 5 goto Scan
+	if %num% GEQ 6 goto Scan
 	set /a num+=1
 )
 goto Loop

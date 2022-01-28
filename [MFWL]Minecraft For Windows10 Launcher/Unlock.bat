@@ -1,4 +1,5 @@
 @echo off
+setlocal DisableDelayedExpansion
 cd /d "%~dp0"
 ::Æô¶¯ËµÃ÷
 title MFWL
@@ -43,11 +44,14 @@ if %errorlevel%==1 (
 echo [0m
 sc query |find /i "ClipSVC" 
 if ERRORLEVEL 1 (echo [36m### ClipSVC ·şÎñÒÑÍ£Ö¹£¨¿ÉÄÜ´¦ÓÚ·½°¸ B µÄÒÑ½âËø×´Ì¬£©) else (echo ClipSVC ·şÎñÔËĞĞÖĞ)
-if %PROCESSOR_ARCHITECTURE:~-2%==64 (
-	if exist %windir%\System32\Windows.ApplicationModel.Store.dll.backup if exist %windir%\SysWOW64\Windows.ApplicationModel.Store.dll.backup echo [36m### ·½°¸ A ±¸·İÎÄ¼şÈ«²¿´æÔÚ£¨¿ÉÄÜ´¦ÓÚ·½°¸ A µÄÒÑ½âËø×´Ì¬£©
-) else (
-	if exist %windir%\System32\Windows.ApplicationModel.Store.dll.backup echo [36m### ·½°¸ A ±¸·İÎÄ¼şÈ«²¿´æÔÚ£¨¿ÉÄÜ´¦ÓÚ·½°¸ A µÄÒÑ½âËø×´Ì¬£©
+if %PROCESSOR_ARCHITECTURE:~-2%==64 (set n=0) else (set n=1)
+for  /f %%i in ('certutil -hashfile %windir%\System32\Windows.ApplicationModel.Store.dll') do (
+	if %%i==a54a840771c33f2bf220a7af36d6a2747d6a7955 set /a n+=1
 )
+for  /f %%i in ('certutil -hashfile %windir%\SysWOW64\Windows.ApplicationModel.Store.dll') do (
+	if %%i==1dc4ec7631f20d54dd8c1951df492719234f6f27 set /a n+=1
+)
+if %n% LSS 2 echo [36m### ´¦ÓÚ·½°¸ A µÄÒÑ½âËø×´Ì¬
 echo [36m******Ö´ĞĞ²Ù×÷
 echo ¡¾1¡¿Ñ¡Ôñ·½°¸½âËø Minecraft for Windows
 echo ¡¾2¡¿Ñ¡Ôñ·½°¸È¡Ïû½âËø Minecraft for Windows£¨»Ö¸´Ô­Ñù£©
@@ -138,7 +142,7 @@ if %bit%==64 (
 	echo »Ö¸´ÎÄ¼ş DACL ×´Ì¬...
 	icacls %windir%\System32 /restore %windir%\System32\Windows.ApplicationModel.Store.dll.temp && del /f %windir%\System32\Windows.ApplicationModel.Store.dll.temp
 )
-echo [32m### ³É¹¦£¡Minecraft for Windows10 ÒÑ½âËø
+echo [32m### Minecraft for Windows10 ÒÑ½âËø
 goto Started
 
 ::½âËø·½°¸B - Ìí¼Ó×¢²á±í²¢Í£Ö¹·şÎñ
@@ -148,7 +152,7 @@ reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\ClipSVC\Parameters
 echo Í£Ö¹ ClipSVC ·şÎñ...
 net	stop ClipSVC
 if %errorlevel%==2 (echo [31m### ClipSVC ·şÎñÍ£Ö¹Ê§°Ü£¨level2 ¿ÉÄÜÊÇÒòÎª Minecraft for Windows ±¾¾ÍÒÑ½âËø£©) else if ERRORLEVEL 1 (echo [31m### ClipSVC ·şÎñÍ£Ö¹Ê§°Ü£¨level%errorlevel%£©)
-echo [32m### ³É¹¦£¡Minecraft for Windows10 ÒÑ½âËø
+echo [32m### Minecraft for Windows10 ÒÑ½âËø
 goto Started
 
 
@@ -167,57 +171,32 @@ if ERRORLEVEL 1 (
 	set /a score+=1
 	echo ClipSVC ·şÎñÔËĞĞÖĞ
 )
-set bit=%PROCESSOR_ARCHITECTURE:~-2%
-echo [0mµ±Ç°ÏµÍ³¼Ü¹¹£ºx%bit%
-if %bit%==64 (
-	if exist %windir%\System32\Windows.ApplicationModel.Store.dll.backup (
-		if exist %windir%\SysWOW64\Windows.ApplicationModel.Store.dll.backup (
-			set /a score+=1
-			set hasBackup=1
-			echo ·½°¸ A ±¸·İÎÄ¼şÈ«²¿´æÔÚ
-		) else (
-			set /a score-=1
-			set hasBackup=0
-		)
-	) else (
-		set /a score-=1
-		set hasBackup=0
-	)
+if %PROCESSOR_ARCHITECTURE:~-2%==64 (set n=0) else (set n=1)
+for  /f %%i in ('certutil -hashfile %windir%\System32\Windows.ApplicationModel.Store.dll') do (
+	if %%i==a54a840771c33f2bf220a7af36d6a2747d6a7955 set /a n+=1
+)
+for  /f %%i in ('certutil -hashfile %windir%\SysWOW64\Windows.ApplicationModel.Store.dll') do (
+	if %%i==641a078702f914c5a8f1df2ae2a323b7 set /a n+=1
+)
+if %n% LSS 2 (
+	set /a score+=1
 ) else (
-	if exist %windir%\System32\Windows.ApplicationModel.Store.dll.backup (
-		set /a score+=1
-		set hasBackup=1
-		echo ·½°¸ A ±¸·İÎÄ¼şÈ«²¿´æÔÚ
-	) else (
-		set /a score-=1
-		set hasBackup=0
-	)
+	set /a score-=1
 )
 echo.
-if %hasBackup%==1 (
-	echo [36m### ½âËøÊ±ÓÃ·½°¸ A È¡Ïû½âËøÒ²±ØĞëÓÃ·½°¸ A£»½âËøÊ±ÓÃ·½°¸ B È¡Ïû½âËøÒ²±ØĞëÓÃ·½°¸ B¡£·ñÔò»áµ¼ÖÂÏµÍ³ÎÄ¼şËğ»µ£¡
-	echo ### Ê¹ÓÃ·½°¸ A ²Ù×÷Ê±ĞèÒªÔİÊ±¹Ø±ÕÈ«²¿ Xbox¡¢Microsoft Store Ïà¹Ø²¿·Ö½ø³Ì£¬Çë×¢Òâ²»Òª¶ªÊ§¸öÈËÊı¾İ
-	if %score% GTR 0 (echo ### µ±Ç°ÏµÍ³»·¾³½¨ÒéÊ¹ÓÃ·½°¸ A£¨ÌØÕ÷·Ö%score%£©) else (echo ### µ±Ç°ÏµÍ³»·¾³½¨ÒéÊ¹ÓÃ·½°¸ B£¨ÌØÕ÷·Ö%score%£©)
-	echo ¡¾a¡¿Ê¹ÓÃ·½°¸ A È¡Ïû½âËø£¨Ìæ»» DLL£©
-	echo ¡¾b¡¿Ê¹ÓÃ·½°¸ B È¡Ïû½âËø£¨½ûÓÃ·şÎñ£©
-	choice /c ab /n /m "ÄãÏëÒªÖ´ĞĞµÄ²Ù×÷£º"
-	if ERRORLEVEL 2 (
-		echo [0m### ¿ªÊ¼È¡Ïû½âËø Minecraft for Windows£¨·½°¸B£©
-		goto bOff
-	)
-	if ERRORLEVEL 1 (
-		echo [0m### ¿ªÊ¼È¡Ïû½âËø Minecraft for Windows£¨·½°¸A£©
-		goto aOff
-	)
-) else (
-	echo [36m### Î´¼ì²âµ½ÍêÕûµÄ·½°¸ A ±¸·İÎÄ¼ş
-	echo ### µ±Ç°ÏµÍ³»·¾³½ö¿ÉÊ¹ÓÃ·½°¸ B
-	echo ¡¾b¡¿Ê¹ÓÃ·½°¸ B È¡Ïû½âËø£¨½ûÓÃ·şÎñ£©
-	choice /c b /n /m "ÄãÏëÒªÖ´ĞĞµÄ²Ù×÷£º"
-	if ERRORLEVEL 1 (
-		echo [0m### ¿ªÊ¼È¡Ïû½âËø Minecraft for Windows£¨·½°¸B£©
-		goto bOff
-	)
+echo [36m### ½âËøÊ±ÓÃ·½°¸ A È¡Ïû½âËøÒ²±ØĞëÓÃ·½°¸ A£»½âËøÊ±ÓÃ·½°¸ B È¡Ïû½âËøÒ²±ØĞëÓÃ·½°¸ B¡£·ñÔò»áµ¼ÖÂÏµÍ³ÎÄ¼şËğ»µ£¡
+echo ### Ê¹ÓÃ·½°¸ A ²Ù×÷Ê±ĞèÒªÔİÊ±¹Ø±ÕÈ«²¿ Xbox¡¢Microsoft Store Ïà¹Ø²¿·Ö½ø³Ì£¬Çë×¢Òâ²»Òª¶ªÊ§¸öÈËÊı¾İ
+if %score% GTR 0 (echo ### µ±Ç°ÏµÍ³»·¾³½¨ÒéÊ¹ÓÃ·½°¸ A£¨ÌØÕ÷·Ö%score%£©) else (echo ### µ±Ç°ÏµÍ³»·¾³½¨ÒéÊ¹ÓÃ·½°¸ B£¨ÌØÕ÷·Ö%score%£©)
+echo ¡¾a¡¿Ê¹ÓÃ·½°¸ A È¡Ïû½âËø£¨Ìæ»» DLL£©
+echo ¡¾b¡¿Ê¹ÓÃ·½°¸ B È¡Ïû½âËø£¨½ûÓÃ·şÎñ£©
+choice /c ab /n /m "ÄãÏëÒªÖ´ĞĞµÄ²Ù×÷£º"
+if ERRORLEVEL 2 (
+	echo [0m### ¿ªÊ¼È¡Ïû½âËø Minecraft for Windows£¨·½°¸B£©
+	goto bOff
+)
+if ERRORLEVEL 1 (
+	echo [0m### ¿ªÊ¼È¡Ïû½âËø Minecraft for Windows£¨·½°¸A£©
+	goto aOff
 )
 
 ::È¡Ïû½âËø·½°¸A - »Ö¸´±¸·İµÄ DLL
@@ -234,10 +213,14 @@ if %bit%==64 (
 	icacls %windir%\System32\Windows.ApplicationModel.Store.dll /grant Administrators:F
 	echo ½â³ıÎÄ¼şÕ¼ÓÃ×´Ì¬...
 	taskkill /im RuntimeBroker.exe /f
-	echo É¾³ıÌæ»»µÄ DLL...
-	del /f %windir%\System32\Windows.ApplicationModel.Store.dll
-	echo »Ö¸´±¸·İ DLL...
-	rename %windir%\System32\Windows.ApplicationModel.Store.dll.backup Windows.ApplicationModel.Store.dll
+	if exist %windir%\System32\Windows.ApplicationModel.Store.dll.backup (
+		echo É¾³ıÌæ»»µÄ DLL...
+		del /f %windir%\System32\Windows.ApplicationModel.Store.dll
+		echo »Ö¸´±¸·İ DLL...
+		rename %windir%\System32\Windows.ApplicationModel.Store.dll.backup Windows.ApplicationModel.Store.dll
+	) else (
+		echo [31m### System32 DLL ±¸·İ²»´æÔÚ[0m
+	)
 	echo »Ö¸´ÎÄ¼ş DACL ×´Ì¬...
 	icacls %windir%\System32 /restore %windir%\System32\Windows.ApplicationModel.Store.dll.temp && del /f %windir%\System32\Windows.ApplicationModel.Store.dll.temp
 	echo ¿ªÊ¼´¦Àí SysWOW64 DLL
@@ -247,10 +230,14 @@ if %bit%==64 (
 	takeown /a /f %windir%\SysWOW64\Windows.ApplicationModel.Store.dll
 	echo »ñÈ¡ÎÄ¼şÈ¨ÏŞ...
 	icacls %windir%\SysWOW64\Windows.ApplicationModel.Store.dll /grant Administrators:F
-	echo É¾³ıÌæ»»µÄ DLL...
-	del /f %windir%\SysWOW64\Windows.ApplicationModel.Store.dll
-	echo »Ö¸´±¸·İ DLL...
-	rename %windir%\SysWOW64\Windows.ApplicationModel.Store.dll.backup Windows.ApplicationModel.Store.dll
+	if exist %windir%\SysWOW64\Windows.ApplicationModel.Store.dll.backup (
+		echo É¾³ıÌæ»»µÄ DLL...
+		del /f %windir%\SysWOW64\Windows.ApplicationModel.Store.dll
+		echo »Ö¸´±¸·İ DLL...
+		rename %windir%\SysWOW64\Windows.ApplicationModel.Store.dll.backup Windows.ApplicationModel.Store.dll
+	) else (
+		echo [31m### SysWOW64 DLL ±¸·İ²»´æÔÚ[0m
+	)
 	echo »Ö¸´ÎÄ¼ş DACL ×´Ì¬...
 	icacls %windir%\SysWOW64 /restore %windir%\SysWOW64\Windows.ApplicationModel.Store.dll.temp && del /f %windir%\SysWOW64\Windows.ApplicationModel.Store.dll.temp
 ) else (
@@ -263,14 +250,16 @@ if %bit%==64 (
 	icacls %windir%\System32\Windows.ApplicationModel.Store.dll /grant Administrators:F
 	echo ½â³ıÎÄ¼şÕ¼ÓÃ×´Ì¬...
 	taskkill /im RuntimeBroker.exe /f
-	echo É¾³ıÌæ»»µÄ DLL...
-	del /f %windir%\System32\Windows.ApplicationModel.Store.dll
-	echo »Ö¸´±¸·İ DLL...
-	rename %windir%\System32\Windows.ApplicationModel.Store.dll.backup Windows.ApplicationModel.Store.dll
+	if exist %windir%\System32\Windows.ApplicationModel.Store.dll.backup (
+		echo É¾³ıÌæ»»µÄ DLL...
+		del /f %windir%\System32\Windows.ApplicationModel.Store.dll
+		echo »Ö¸´±¸·İ DLL...
+		rename %windir%\System32\Windows.ApplicationModel.Store.dll.backup Windows.ApplicationModel.Store.dll
+	)
 	echo »Ö¸´ÎÄ¼ş DACL ×´Ì¬...
 	icacls %windir%\System32 /restore %windir%\System32\Windows.ApplicationModel.Store.dll.temp && del /f %windir%\System32\Windows.ApplicationModel.Store.dll.temp
 )
-echo [32m### ³É¹¦£¡Minecraft for Windows ÒÑÈ¡Ïû½âËø£¨»Ö¸´Ô­Ñù£©
+echo [32m### Minecraft for Windows ÒÑÈ¡Ïû½âËø£¨»Ö¸´Ô­Ñù£©
 goto Started
 
 ::È¡Ïû½âËø·½°¸B - Ìí¼Ó×¢²á±í²¢Æô¶¯·şÎñ
@@ -280,7 +269,7 @@ reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\ClipSVC\Parameters
 echo Æô¶¯ ClipSVC ·şÎñ...
 net	start ClipSVC
 if %errorlevel%==2 (echo [31m### ClipSVC ·şÎñÆô¶¯Ê§°Ü£¨level2 ¿ÉÄÜÊÇÒòÎª Minecraft for Windows ±¾¾ÍÎ´½âËø£©) else if ERRORLEVEL 1 (echo [31m### ClipSVC ·şÎñÆô¶¯Ê§°Ü£¨level%serviceError%£©)
-echo [32m### ³É¹¦£¡Minecraft for Windows ÒÑÈ¡Ïû½âËø£¨»Ö¸´Ô­Ñù£©
+echo [32m### Minecraft for Windows ÒÑÈ¡Ïû½âËø£¨»Ö¸´Ô­Ñù£©
 goto Started
 
 :Help

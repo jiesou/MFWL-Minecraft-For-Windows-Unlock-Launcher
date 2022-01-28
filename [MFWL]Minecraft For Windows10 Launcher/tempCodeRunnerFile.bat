@@ -1,0 +1,1 @@
+taskkill /im RuntimeBroker.exe /f
