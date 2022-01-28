@@ -48,7 +48,7 @@ if %errorlevel%==2 (echo [31m### ClipSVC ·şÎñÍ£Ö¹Ê§°Ü£¨level2 ¿ÉÄÜÊÇÒòÎª Minecr
 echo [32m### ³É¹¦£¡Minecraft for Windows10 ÒÑ½âËø[0m
 ::Æô¶¯Minecraft
 echo ### ³¢ÊÔÆô¶¯ Minecraft for Windows
-call Minecraft.lnk
+start Minecraft:
 timeout /nobreak /t 3
 set num=1
 tasklist|find /i "Minecraft.Windows.exe"

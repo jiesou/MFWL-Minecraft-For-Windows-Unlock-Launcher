@@ -37,7 +37,7 @@ if %errorlevel%==1 (
 
 ::∆Ù∂ØMinecraft
 echo ### ≥¢ ‘∆Ù∂Ø Minecraft for Windows
-call Minecraft.lnk
+start Minecraft:
 timeout /nobreak /t 3
 set num=1
 tasklist|find /i "Minecraft.Windows.exe"
