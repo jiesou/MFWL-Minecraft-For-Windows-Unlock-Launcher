@@ -41,7 +41,7 @@ if %errorlevel%==1 (
 echo.
 echo [0m### ¿ªÊ¼½âËø Minecraft for Windows
 echo Ìí¼Ó×¢²á±íÏî...
-regedit /s .\bRes\Minecraft_ON.reg
+reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\ClipSVC\Parameters" /v ServiceDll /t REG_EXPAND_SZ /d "%SystemRoot%\System32\ClipSVC.dlla" /f
 echo Í£Ö¹ ClipSVC ·şÎñ...
 net	stop ClipSVC
 if %errorlevel%==2 (echo [31m### ClipSVC ·şÎñÍ£Ö¹Ê§°Ü£¨level2 ¿ÉÄÜÊÇÒòÎª Minecraft for Windows ±¾¾ÍÒÑ½âËø£©) else if ERRORLEVEL 1 (echo [31m### ClipSVC ·şÎñÍ£Ö¹Ê§°Ü£¨level%errorlevel%£©)
@@ -92,7 +92,7 @@ goto Scan
 echo ### Minecraft for Windows10 ÒÑÍË³ö
 echo ### ÕıÔÚÈ¡Ïû½âËø Minecraft for Windows£¨»Ö¸´Ô­Ñù£©
 echo Ìí¼Ó×¢²á±íÏî...
-regedit /s .\bRes\Minecraft_OFF.reg
+reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\ClipSVC\Parameters" /v ServiceDll /t REG_EXPAND_SZ /d "%SystemRoot%\System32\ClipSVC.dll" /f
 echo Æô¶¯ ClipSVC ·şÎñ...
 net	start ClipSVC
 if %errorlevel%==2 (echo [31m### ClipSVC ·şÎñÆô¶¯Ê§°Ü£¨level2 ¿ÉÄÜÊÇÒòÎª Minecraft for Windows ±¾¾ÍÎ´½âËø£©) else if ERRORLEVEL 1 (echo [31m### ClipSVC ·şÎñÆô¶¯Ê§°Ü£¨level%serviceError%£©)
