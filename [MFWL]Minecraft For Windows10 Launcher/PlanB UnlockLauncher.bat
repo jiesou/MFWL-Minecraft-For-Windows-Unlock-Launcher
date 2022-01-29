@@ -13,16 +13,14 @@ echo.
 echo [0mµ±Ç°ÔËÐÐÂ·¾¶£º%CD%
 echo [0m¼ì²é¹ÜÀíÔ±È¨ÏÞ...
 if exist "%SystemRoot%\SysWOW64" path %path%;%windir%\SysNative;%SystemRoot%\SysWOW64;%~dp0
-bcdedit >nul
-if not ERRORLEVEL 1 goto uacOK
+bcdedit >nul && goto uacOK
 echo [31m### Î´»ñÈ¡µ½¹ÜÀíÔ±È¨ÏÞ
 echo [36m### ÇëÊÚÓè¹ÜÀíÔ±È¨ÏÞ£¨UAC£©[0m
 %1 start "" mshta vbscript:createobject("shell.application").shellexecute("""%~0""","::",,"runas",1)(window.close)&exit
 exit /B
 :uacOK
 echo [0m¼ì²é Minecraft for Windows ×´Ì¬...
-tasklist |find /i "Minecraft.Windows.exe"
-if ERRORLEVEL 1 goto mcOK
+tasklist|find "Minecraft.Windows.exe" || goto mcOK
 echo [36m******´íÎó£¡Minecraft for Windows10 ÕýÔÚÔËÐÐ£¬²»ÄÜÍ¬Ê±ÔËÐÐ¶à¸öÊµÀý
 echo ¡¾1¡¿Ç¿ÖÆ¹Ø±Õ Minecraft for Windows10 ²¢¼ÌÐø
 echo ¡¾2¡¿Ìø¹ý¼ì²â×´Ì¬²¢¼ÌÐø
@@ -31,7 +29,6 @@ if %errorlevel%==2 goto Unlock
 if %errorlevel%==1 (
 	echo [0m
 	taskkill /im Minecraft.Windows.exe /f
-	timeout /nobreak /t 3
 	goto Unlock
 )
 :mcOK
@@ -51,11 +48,7 @@ echo ### ³¢ÊÔÆô¶¯ Minecraft for Windows
 start Minecraft:
 timeout /nobreak /t 3
 set num=1
-tasklist|find /i "Minecraft.Windows.exe"
-if not ERRORLEVEL 1 (
-	echo [32m### Minecraft for Windows10 ÒÑ³É¹¦Æô¶¯[0m
-	goto Loop
-)
+tasklist|find "Minecraft.Windows.exe" || echo [32m### Minecraft for Windows10 ÒÑ³É¹¦¿ªÊ¼ÔËÐÐ[0m & goto Loop
 echo [36m******´íÎó£¡Minecraft for Windows10 Ó¦µ±Æô¶¯£¬µ«ÒòÎ´ÖªÔ­ÒòÎ´Æô¶¯
 echo ÇëÈ·±£ÄúÒÑ¾­°²×°ÁË Minecraft for Windows£¨¿ÉÒÔÊÇÊÔÓÃ°æ£©
 echo ¡¾1¡¿ÖØÐÂ³¢ÊÔÆô¶¯ Minecraft for Windows10 ²¢²»ÔÙ¼ì²âÆä×´Ì¬
@@ -69,23 +62,23 @@ if %errorlevel%==1 (
 	goto Loop
 )
 
-::³õÊ¼½áÊø7´Î RuntimeBroker.exe ½ø³Ì
+::³õÊ¼½áÊø6´Î RuntimeBroker.exe ½ø³Ì
 :Loop
-for /f "tokens=3" %%i in ('tasklist /nh /apps /fi "IMAGENAME eq RuntimeBroker.exe" ^| find "Microsoft.MinecraftUWP"') do @taskkill /pid %%i /f
+for /f "tokens=3" %%i in ('tasklist /nh /apps /fi "IMAGENAME eq RuntimeBroker.exe"^|find "Microsoft.MinecraftUWP"') do @taskkill /pid %%i /f
 if not ERRORLEVEL 1 (
 	echo ÒÑ½áÊøµÚ%num%´Î RuntimeBroker.exe ½ø³Ì...
-	if %num% GEQ 6 goto Scan
+	if %num% GEQ 6 (
+		echo [32m### Minecraft for Windows ÒÑ³É¹¦Æô¶¯Íê±Ï[0m
+		goto Scan
+	)
 	set /a num+=1
 )
 goto Loop
 
-::Ã¿10Ãë¼ì²âÒ»´ÎMinecraft½ø³Ì²¢½áÊø RuntimeBroker.exe ½ø³Ì
+::Ñ­»·¼ì²â Minecraft ÊÇ·ñ¹Ø±Õ²¢½áÊø RuntimeBroker.exe ½ø³Ì
 :Scan
-timeout /nobreak /t 10
-tasklist|find /i "Minecraft.Windows.exe"
-if ERRORLEVEL 1 goto Off
-::taskkill /im RuntimeBroker.exe /f && echo ### ÒÑ½áÊø RuntimeBroker.exe ½ø³Ì
-echo ### Minecraft for Windows10 ÔËÐÐÖÐ
+tasklist|find "Minecraft.Windows.exe" >nul || goto Off
+for /f "tokens=3" %%i in ('tasklist /nh /apps /fi "IMAGENAME eq RuntimeBroker.exe"^|find "Microsoft.MinecraftUWP"') do @taskkill /pid %%i /f
 goto Scan
 
 :Off

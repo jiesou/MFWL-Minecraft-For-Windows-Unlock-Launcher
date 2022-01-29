@@ -1,0 +1,1 @@
+tasklist|find "Minecraft.Windows.exe" || 

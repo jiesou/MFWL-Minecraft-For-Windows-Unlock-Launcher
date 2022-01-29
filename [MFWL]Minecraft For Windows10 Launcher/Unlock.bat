@@ -22,8 +22,7 @@ echo [36m### ÇëÊÚÓè¹ÜÀíÔ±È¨ÏŞ£¨UAC£©[0m
 exit /B
 :uacOK
 echo [0m¼ì²é Minecraft for Windows ×´Ì¬...
-tasklist |find /i "Minecraft.Windows.exe"
-if ERRORLEVEL 1 goto mcOK
+tasklist|find "Minecraft.Windows.exe" || goto mcOK
 echo [36m******´íÎó£¡Minecraft for Windows10 ÕıÔÚÔËĞĞ£¬²»ÄÜÔÚÆäÔËĞĞÖĞ²Ù×÷
 echo ¡¾1¡¿Ç¿ÖÆ¹Ø±Õ Minecraft for Windows10 ²¢¼ÌĞø
 echo ¡¾2¡¿Ìø¹ı¼ì²â×´Ì¬²¢¼ÌĞø

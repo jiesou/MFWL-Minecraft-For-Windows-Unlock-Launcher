@@ -49,17 +49,8 @@ if %errorlevel%==1 (
 	goto Loop
 )
 
-::初始结束6次 RuntimeBroker.exe 进程
+::循环结束 RuntimeBroker.exe 进程
 :Loop
-for /f "tokens=3" %%i in ('tasklist /nh /apps /fi "IMAGENAME eq RuntimeBroker.exe" ^| find "Microsoft.MinecraftUWP"') do @taskkill /pid %%i /f
-if not ERRORLEVEL 1 (
-	echo 已结束第%num%次 RuntimeBroker.exe 进程...
-	if %num% GEQ 5 goto Ok
-	set /a num+=1
-)
+tasklist|find "Minecraft.Windows.exe" >nul || exit
+for /f "tokens=3" %%i in ('tasklist /nh /apps /fi "IMAGENAME eq RuntimeBroker.exe"^|find "Microsoft.MinecraftUWP"') do @taskkill /pid %%i /f
 goto Loop
-
-:Ok
-echo ### 所有 RuntimeBroker.exe 进程已结束
-timeout /t 3
-exit
