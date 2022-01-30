@@ -28,9 +28,9 @@ echo ¡¾1¡¿Ç¿ÖÆ¹Ø±Õ Minecraft for Windows10 ²¢¼ÌĞø
 echo ¡¾2¡¿Ìø¹ı¼ì²â×´Ì¬²¢¼ÌĞø
 echo ¡¾3¡¿°ïÖúĞÅÏ¢ÓëÏà¹ØÁ´½Ó
 choice /c 123 /n /m "ÄãÏëÒªÖ´ĞĞµÄ²Ù×÷£º"
-if %errorlevel%==3 goto Help
-if %errorlevel%==2 goto Started
-if %errorlevel%==1 (
+if ERRORLEVEL 3 goto Help
+if ERRORLEVEL 2 goto Started
+if ERRORLEVEL 1 (
 	echo [0m
 	taskkill /im Minecraft.Windows.exe /f
 	timeout /nobreak /t 3

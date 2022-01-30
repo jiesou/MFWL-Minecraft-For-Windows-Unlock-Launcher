@@ -2,7 +2,7 @@
 cd /d "%~dp0"
 ::Æô¶¯ËµÃ÷
 title MFWL
-echo [36m****** MINECRAFT FOR WINDOWS UNLOCK
+echo [36m****** MINECRAFT FOR WINDOWS PLAN B UNLOCK LAUNCHER
 echo ¸Ã½Å±¾½«×Ô¶¯½âËø¡¢´ò¿ª Minecraft for Windows£¨UWP£©
 echo ÇëÈ·±£ÄúÒÑ¾­°²×°ÁË Minecraft for Windows£¨¿ÉÒÔÊÇÊÔÓÃ°æ£©
 echo Çë²»ÒªÔÚÓÎÏ·ÔËĞĞ¹ı³ÌÖĞ¹Ø±Õ±¾½Å±¾£¬ÓÎÏ·¹Ø±Õºó±¾½Å±¾½«×Ô¶¯È¡Ïû½âËø²¢ÍË³ö
@@ -25,8 +25,8 @@ echo [36m******´íÎó£¡Minecraft for Windows10 ÕıÔÚÔËĞĞ£¬²»ÄÜÍ¬Ê±ÔËĞĞ¶à¸öÊµÀı
 echo ¡¾1¡¿Ç¿ÖÆ¹Ø±Õ Minecraft for Windows10 ²¢¼ÌĞø
 echo ¡¾2¡¿Ìø¹ı¼ì²â×´Ì¬²¢¼ÌĞø
 choice /c 12 /n /m "ÄãÏëÒªÖ´ĞĞµÄ²Ù×÷£º"
-if %errorlevel%==2 goto Unlock
-if %errorlevel%==1 (
+if ERRORLEVEL 2 goto Unlock
+if ERRORLEVEL 1 (
 	echo [0m
 	taskkill /im Minecraft.Windows.exe /f
 	goto Unlock
@@ -47,33 +47,23 @@ echo [32m### ³É¹¦£¡Minecraft for Windows10 ÒÑ½âËø[0m
 echo ### ³¢ÊÔÆô¶¯ Minecraft for Windows
 start Minecraft:
 timeout /nobreak /t 3
-set num=1
-tasklist|find "Minecraft.Windows.exe" || echo [32m### Minecraft for Windows10 ÒÑ³É¹¦¿ªÊ¼ÔËĞĞ[0m & goto Loop
+tasklist|find "Minecraft.Windows.exe" 
+if ERRORLEVEL 1 (
+	echo [32m### Minecraft for Windows10 ÒÑ³É¹¦¿ªÊ¼ÔËĞĞ[0m
+	goto Scan
+)
 echo [36m******´íÎó£¡Minecraft for Windows10 Ó¦µ±Æô¶¯£¬µ«ÒòÎ´ÖªÔ­ÒòÎ´Æô¶¯
 echo ÇëÈ·±£ÄúÒÑ¾­°²×°ÁË Minecraft for Windows£¨¿ÉÒÔÊÇÊÔÓÃ°æ£©
 echo ¡¾1¡¿ÖØĞÂ³¢ÊÔÆô¶¯ Minecraft for Windows10 ²¢²»ÔÙ¼ì²âÆä×´Ì¬
 echo ¡¾2¡¿Ìø¹ı¼ì²â×´Ì¬²¢¼ÌĞø
 choice /c 12 /n /m "ÄãÏëÒªÖ´ĞĞµÄ²Ù×÷£º"
-if %errorlevel%==2 goto Loop
-if %errorlevel%==1 (
+if ERRORLEVEL 2 goto Scan
+if ERRORLEVEL 1 (
 	call Minecraft.lnk
 	timeout /nobreak /t 3
 	echo [0m
-	goto Loop
+	goto Scan
 )
-
-::³õÊ¼½áÊø6´Î RuntimeBroker.exe ½ø³Ì
-:Loop
-for /f "tokens=3" %%i in ('tasklist /nh /apps /fi "IMAGENAME eq RuntimeBroker.exe"^|find "Microsoft.MinecraftUWP"') do @taskkill /pid %%i /f
-if not ERRORLEVEL 1 (
-	echo ÒÑ½áÊøµÚ%num%´Î RuntimeBroker.exe ½ø³Ì...
-	if %num% GEQ 6 (
-		echo [32m### Minecraft for Windows ÒÑ³É¹¦Æô¶¯Íê±Ï[0m
-		goto Scan
-	)
-	set /a num+=1
-)
-goto Loop
 
 ::Ñ­»·¼ì²â Minecraft ÊÇ·ñ¹Ø±Õ²¢½áÊø RuntimeBroker.exe ½ø³Ì
 :Scan
@@ -90,5 +80,4 @@ echo Æô¶¯ ClipSVC ·şÎñ...
 net	start ClipSVC
 if %errorlevel%==2 (echo [31m### ClipSVC ·şÎñÆô¶¯Ê§°Ü£¨level2 ¿ÉÄÜÊÇÒòÎª Minecraft for Windows ±¾¾ÍÎ´½âËø£©) else if ERRORLEVEL 1 (echo [31m### ClipSVC ·şÎñÆô¶¯Ê§°Ü£¨level%serviceError%£©)
 echo [32m### ³É¹¦£¡Minecraft for Windows ÒÑÈ¡Ïû½âËø£¨»Ö¸´Ô­Ñù£©[0m
-timeout /t 3
 exit

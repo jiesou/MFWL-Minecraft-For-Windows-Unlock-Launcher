@@ -1,1 +1,1 @@
-tasklist|find "Minecraft.Windows.exe" || 
+进程
