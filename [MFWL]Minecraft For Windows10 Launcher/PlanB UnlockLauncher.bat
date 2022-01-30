@@ -48,7 +48,7 @@ echo ### ³¢ÊÔÆô¶¯ Minecraft for Windows
 start Minecraft:
 timeout /nobreak /t 3
 tasklist|find "Minecraft.Windows.exe" 
-if ERRORLEVEL 1 (
+if not ERRORLEVEL 1 (
 	echo [32m### Minecraft for Windows10 ÒÑ³É¹¦¿ªÊ¼ÔËÐÐ[0m
 	goto Scan
 )
