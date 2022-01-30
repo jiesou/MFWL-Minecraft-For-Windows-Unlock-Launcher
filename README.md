@@ -18,7 +18,9 @@ This is a free script to unlock Minecraft for Windows, only Chinese is supported
 
 # 如何使用
 
-直接下载源码打包的zip
+~~直接下载源码打包的zip~~
+update:
+不建议直接下载源码打包的zip，可能存在玄学的编码问题，请确保所有 BAT 文件的编码是 GBK 且真的是 GBK。你可以从博客文章中的网盘链接下载
 
 按照脚本说明操作即可
 
