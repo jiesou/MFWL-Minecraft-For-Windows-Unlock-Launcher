@@ -41,17 +41,21 @@ if ERRORLEVEL 1 (
 ::»ñÈ¡ÓÃ»§²Ù×÷
 :Started
 echo.
-for /f "tokens=3" %%i in ('reg query "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\ClipSVC\Parameters" /v "ServiceDll"') do (
-	if not %%i==C:\WINDOWS\System32\ClipSVC.dll (echo [36m### ´¦ÓÚ·½°¸ B µÄÒÑ½âËø×´Ì¬[0m)
-)
+::64Î»ÏµÍ³ĞèÒªÁ½¸öÎÄ¼ş¶¼½âËø£¬n³õÊ¼ÖµÎª0£»32Î»ÏµÍ³Ö»ĞèÒªÒ»¸öÎÄ¼ş½âËø£¬n³õÊ¼ÖµÎª1
 if %PROCESSOR_ARCHITECTURE:~-2%==64 (set n=0) else (set n=1)
+	::Ö®Ç°ÎÒÁ½¸öÎÄ¼şµÄ hash Åª´íÁË£¬Åª³ÉÔ­ DLL µÄ hash ÁË£¨¶ø²»ÊÇÌæ»»ºóµÄ£©¡£ËäÈ»ÔÚÎÒµÄÉè±¸ÉÏµÄ½á¹ûÃ»ÓĞÎÊÌâ£¬µ«ÔÚÆäËûÉè±¸ÉÏ¿ÉÄÜÊÇ´íµÄ --jiesou
 for  /f %%i in ('certutil -hashfile %windir%\System32\Windows.ApplicationModel.Store.dll') do (
-	if %%i==a54a840771c33f2bf220a7af36d6a2747d6a7955 set /a n+=1
+	if %%i==8e92ff0b8ff2d1b0c2fbe59bcbb1705febadcbfd set /a n+=1
 )
 for  /f %%i in ('certutil -hashfile %windir%\SysWOW64\Windows.ApplicationModel.Store.dll') do (
-	if %%i==1dc4ec7631f20d54dd8c1951df492719234f6f27 set /a n+=1
+	if %%i==92f46f5e11d1635ad48fee5c3d1b1632fcb5f549 set /a n+=1
 )
-if %n% LSS 2 echo [36m### ´¦ÓÚ·½°¸ A µÄÒÑ½âËø×´Ì¬
+echo [36m### ½âËøÊ±ÓÃ·½°¸ A È¡Ïû½âËøÒ²±ØĞëÓÃ·½°¸ A£»½âËøÊ±ÓÃ·½°¸ B È¡Ïû½âËøÒ²±ØĞëÓÃ·½°¸ B¡£·ñÔò»áµ¼ÖÂÏµÍ³ÎÄ¼şËğ»µ£¡
+::nĞ¡ÓÚ2Ôò±íÊ¾·½°¸A½âËø²»ÍêÕû
+if %n%==2 echo [36m### ´¦ÓÚ·½°¸ A µÄÒÑ½âËø×´Ì¬
+for /f "tokens=3" %%i in ('reg query "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\ClipSVC\Parameters" /v "ServiceDll"') do (
+	if not %%i==C:\WINDOWS\System32\ClipSVC.dll echo [36m### ´¦ÓÚ·½°¸ B µÄÒÑ½âËø×´Ì¬
+)
 echo [36m******Ö´ĞĞ²Ù×÷
 echo ¡¾1¡¿Ñ¡Ôñ·½°¸½âËø Minecraft for Windows
 echo ¡¾2¡¿Ñ¡Ôñ·½°¸È¡Ïû½âËø Minecraft for Windows£¨»Ö¸´Ô­Ñù£©
@@ -64,6 +68,7 @@ if ERRORLEVEL 1 goto analyticsOn
 
 ::·ÖÎöÊÊºÏµÄ½âËø·½°¸
 :analyticsOn
+echo.
 echo [0m### ¿ªÊ¼·ÖÎöÊÊºÏµÄ½âËø·½°¸
 for /f "tokens=4-7 delims=[.] " %%i in ('ver') do @(if %%i==Version (set ver=%%j.%%k.%%l) else (set ver=%%i.%%j.%%k))
 echo µ±Ç°ÏµÍ³°æ±¾£º%ver%
@@ -147,37 +152,28 @@ echo [0mÌí¼Ó×¢²á±íÏî...
 reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\ClipSVC\Parameters" /v ServiceDll /t REG_EXPAND_SZ /d "%SystemRoot%\System32\ClipSVC.dlla" /f
 echo Í£Ö¹ ClipSVC ·şÎñ...
 net	stop ClipSVC
-if %errorlevel%==2 (echo [31m### ClipSVC ·şÎñÍ£Ö¹Ê§°Ü£¨level2 ¿ÉÄÜÊÇÒòÎª Minecraft for Windows ±¾¾ÍÒÑ½âËø£©) else if ERRORLEVEL 1 (echo [31m### ClipSVC ·şÎñÍ£Ö¹Ê§°Ü£¨level%errorlevel%£©)
+if %errorlevel%==2 (echo [31m### ClipSVC ·şÎñÍ£Ö¹Ê§°Ü£¨level2 ¿ÉÄÜÊÇÒòÎª·şÎñ±¾¾ÍÎ´Æô¶¯£©) else if ERRORLEVEL 1 (echo [31m### ClipSVC ·şÎñÍ£Ö¹Ê§°Ü£¨level%errorlevel%£©)
 echo [32m### Minecraft for Windows10 ÒÑ½âËø
 goto Started
 
 
 ::·ÖÎöÊÊºÏµÄÈ¡Ïû½âËø·½°¸
 :analyticsOff
+echo.
 echo [0m### ¿ªÊ¼·ÖÎöÊÊºÏµÄÈ¡Ïû½âËø·½°¸
-set score=0
-for /f "tokens=4-7 delims=[.] " %%i in ('ver') do @(if %%i==Version (set ver=%%j.%%k.%%l) else (set ver=%%i.%%j.%%k))
-echo µ±Ç°ÏµÍ³°æ±¾£º%ver%
-if %ver% GEQ 10.0.18362.446 (set /a score+=1) else (set /a score-=1)
-for /f "tokens=3" %%i in ('reg query "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\ClipSVC\Parameters" /v "ServiceDll"') do (
-	if %%i==C:\WINDOWS\System32\ClipSVC.dll (set /a score+=1) else (set /a score-=1)
-)
+	::ÏÖÔÚÓĞÁËÎÈ¶¨µÄ·½·¨À´ÅĞ¶Ï½âËø×´Ì¬£¬²»ÔÙĞèÒªÖ®Ç°ÄÇ¸´ÔÓµÄÍ¨¹ı·ÖÊı½¨Òé·½°¸µÄ»úÖÆÁË --jiesou
 if %PROCESSOR_ARCHITECTURE:~-2%==64 (set n=0) else (set n=1)
 for  /f %%i in ('certutil -hashfile %windir%\System32\Windows.ApplicationModel.Store.dll') do (
-	if %%i==a54a840771c33f2bf220a7af36d6a2747d6a7955 set /a n+=1
+	if %%i==8e92ff0b8ff2d1b0c2fbe59bcbb1705febadcbfd set /a n+=1
 )
 for  /f %%i in ('certutil -hashfile %windir%\SysWOW64\Windows.ApplicationModel.Store.dll') do (
-	if %%i==641a078702f914c5a8f1df2ae2a323b7 set /a n+=1
+	if %%i==92f46f5e11d1635ad48fee5c3d1b1632fcb5f549 set /a n+=1
 )
-if %n% LSS 2 (
-	set /a score+=1
-) else (
-	set /a score-=1
-)
-echo.
 echo [36m### ½âËøÊ±ÓÃ·½°¸ A È¡Ïû½âËøÒ²±ØĞëÓÃ·½°¸ A£»½âËøÊ±ÓÃ·½°¸ B È¡Ïû½âËøÒ²±ØĞëÓÃ·½°¸ B¡£·ñÔò»áµ¼ÖÂÏµÍ³ÎÄ¼şËğ»µ£¡
-echo ### Ê¹ÓÃ·½°¸ A ²Ù×÷Ê±ĞèÒªÔİÊ±¹Ø±ÕÈ«²¿ Xbox¡¢Microsoft Store Ïà¹Ø²¿·Ö½ø³Ì£¬Çë×¢Òâ²»Òª¶ªÊ§¸öÈËÊı¾İ
-if %score% GTR 0 (echo ### µ±Ç°ÏµÍ³»·¾³½¨ÒéÊ¹ÓÃ·½°¸ A£¨ÌØÕ÷·Ö%score%£©) else (echo ### µ±Ç°ÏµÍ³»·¾³½¨ÒéÊ¹ÓÃ·½°¸ B£¨ÌØÕ÷·Ö%score%£©)
+if %n%==2 echo ### µ±Ç°ÏµÍ³»·¾³½¨ÒéÊ¹ÓÃ·½°¸ A
+for /f "tokens=3" %%i in ('reg query "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\ClipSVC\Parameters" /v "ServiceDll"') do (
+	if not %%i==C:\WINDOWS\System32\ClipSVC.dll echo ### µ±Ç°ÏµÍ³»·¾³½¨ÒéÊ¹ÓÃ·½°¸ B
+)
 echo ¡¾a¡¿Ê¹ÓÃ·½°¸ A È¡Ïû½âËø£¨Ìæ»» DLL£©
 echo ¡¾b¡¿Ê¹ÓÃ·½°¸ B È¡Ïû½âËø£¨½ûÓÃ·şÎñ£©
 choice /c ab /n /m "ÄãÏëÒªÖ´ĞĞµÄ²Ù×÷£º"
@@ -255,7 +251,7 @@ echo Ìí¼Ó×¢²á±íÏî...
 reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\ClipSVC\Parameters" /v ServiceDll /t REG_EXPAND_SZ /d "%SystemRoot%\System32\ClipSVC.dll" /f
 echo Æô¶¯ ClipSVC ·şÎñ...
 net	start ClipSVC
-if %errorlevel%==2 (echo [31m### ClipSVC ·şÎñÆô¶¯Ê§°Ü£¨level2 ¿ÉÄÜÊÇÒòÎª Minecraft for Windows ±¾¾ÍÎ´½âËø£©) else if ERRORLEVEL 1 (echo [31m### ClipSVC ·şÎñÆô¶¯Ê§°Ü£¨level%serviceError%£©)
+if %errorlevel%==2 (echo [31m### ClipSVC ·şÎñÆô¶¯Ê§°Ü£¨level2 ¿ÉÄÜÊÇÒòÎª·şÎñ±¾¾ÍÒÑÆô¶¯£©) else if ERRORLEVEL 1 (echo [31m### ClipSVC ·şÎñÆô¶¯Ê§°Ü£¨level%serviceError%£©)
 echo [32m### Minecraft for Windows ÒÑÈ¡Ïû½âËø£¨»Ö¸´Ô­Ñù£©
 goto Started
 
