@@ -18,9 +18,7 @@ This is a free script to unlock Minecraft for Windows, only Chinese is supported
 
 # 如何使用
 
-~~直接下载源码打包的zip~~
-
-注意： Github 上的 BAT 文件换行符为 Unix(LF) 这会导致脚本无法正常运行，你可以从博客文章中的网盘链接下载
+直接下载源码打包的zip
 
 按照脚本说明操作即可
 
