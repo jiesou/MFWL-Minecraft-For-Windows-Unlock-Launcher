@@ -5,7 +5,7 @@ title MFWL
 echo [36m****** MINECRAFT FOR WINDOWS MINECRAFT FOR WINDOWS PLAN B LAUNCHER
 echo ¸Ã½Å±¾½«×Ô¶¯´ò¿ª Minecraft for Windows10 ²¢½áÊø RuntimeBroker.exe ½ø³Ì 
 echo ÇëÈ·±£ÄúÒÑ¾­°²×°ÁË Minecraft for Windows£¨¿ÉÒÔÊÇÊÔÓÃ°æ£©
-echo ×îºÃÈ·±£ÏµÍ³²»ÊÇ¾«¼òÓÅ»¯°æÇÒÏµÍ³°æ±¾´óÓÚµÈÓÚ Windows10 1909£¨19H2/KB5004926/18362.446£©
+echo ×îºÃÈ·±£ÏµÍ³²»ÊÇ¾«¼òÓÅ»¯°æÇÒÏµÍ³°æ±¾´óÓÚµÈÓÚ Windows10 1909
 echo Ïà¹Ø·½·¨Ô­ÀíÀ´×ÔÍøÂç£¬±¾½Å±¾ÓÉ jiecs_23 ÖÆ×÷
 ::¼ì²â»·¾³
 echo.

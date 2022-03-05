@@ -6,7 +6,7 @@ echo [36m****** MINECRAFT FOR WINDOWS PLAN B UNLOCK LAUNCHER
 echo ¸Ã½Å±¾½«×Ô¶¯½âËø¡¢´ò¿ª Minecraft for Windows£¨UWP£©
 echo ÇëÈ·±£ÄúÒÑ¾­°²×°ÁË Minecraft for Windows£¨¿ÉÒÔÊÇÊÔÓÃ°æ£©
 echo Çë²»ÒªÔÚÓÎÏ·ÔËÐÐ¹ý³ÌÖÐ¹Ø±Õ±¾½Å±¾£¬ÓÎÏ·¹Ø±Õºó±¾½Å±¾½«×Ô¶¯È¡Ïû½âËø²¢ÍË³ö
-echo ×îºÃÈ·±£ÏµÍ³²»ÊÇ¾«¼òÓÅ»¯°æÇÒÏµÍ³°æ±¾´óÓÚµÈÓÚ Windows10 1909£¨19H2/KB5004926/18362.446£©
+echo ×îºÃÈ·±£ÏµÍ³²»ÊÇ¾«¼òÓÅ»¯°æÇÒÏµÍ³°æ±¾´óÓÚµÈÓÚ Windows10 1909
 echo Ïà¹Ø·½·¨Ô­ÀíÀ´×ÔÍøÂç£¬±¾½Å±¾ÓÉ jiecs_23 ÖÆ×÷
 ::¼ì²â»·¾³
 echo.

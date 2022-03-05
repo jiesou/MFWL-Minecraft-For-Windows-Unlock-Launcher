@@ -6,7 +6,7 @@ title MFWL
 echo [36m****** MINECRAFT FOR WINDOWS UNLOCK
 echo ¸Ã½Å±¾¿ÉÒÔ×Ô¶¯Ñ¡Ôñ·½°¸²¢½âËø Minecraft for Windows£¨UWP£©
 echo ÇëÈ·±£ÄúÒÑ¾­°²×°ÁË Minecraft for Windows£¨¿ÉÒÔÊÇÊÔÓÃ°æ£©
-echo ×îºÃÈ·±£ÏµÍ³²»ÊÇ¾«¼òÓÅ»¯°æÇÒÏµÍ³°æ±¾´óÓÚµÈÓÚ Windows10 1909£¨19H2/KB5004926/18362.446£©
+echo ×îºÃÈ·±£ÏµÍ³²»ÊÇ¾«¼òÓÅ»¯°æÇÒÏµÍ³°æ±¾´óÓÚµÈÓÚ Windows10 1909
 echo ½âËøÊ±ÓÃ·½°¸ A È¡Ïû½âËøÒ²±ØĞëÓÃ·½°¸ A£»½âËøÊ±ÓÃ·½°¸ B È¡Ïû½âËøÒ²±ØĞëÓÃ·½°¸ B¡£·½°¸ A ºÍ B Ö»ĞèÊ¹ÓÃÒ»¸ö£¬²»¿ÉÍ¬Ê±Ê¹ÓÃ¡£·ñÔò»áµ¼ÖÂÏµÍ³ÎÄ¼şËğ»µ£¡
 echo Ïà¹Ø·½·¨Ô­ÀíÀ´×ÔÍøÂç£¬±¾½Å±¾ÓÉ jiecs_23 ÖÆ×÷
 ::¼ì²â»·¾³
@@ -54,7 +54,7 @@ echo [36m### ½âËøÊ±ÓÃ·½°¸ A È¡Ïû½âËøÒ²±ØĞëÓÃ·½°¸ A£»½âËøÊ±ÓÃ·½°¸ B È¡Ïû½âËøÒ²±Ø
 ::nĞ¡ÓÚ2Ôò±íÊ¾·½°¸A½âËø²»ÍêÕû
 if %n%==2 echo [36m### ´¦ÓÚ·½°¸ A µÄÒÑ½âËø×´Ì¬
 for /f "tokens=3" %%i in ('reg query "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\ClipSVC\Parameters" /v "ServiceDll"') do (
-	if not %%i==C:\WINDOWS\System32\ClipSVC.dll echo [36m### ´¦ÓÚ·½°¸ B µÄÒÑ½âËø×´Ì¬
+	if not %%i==%SystemRoot%\System32\ClipSVC.dll echo [36m### ´¦ÓÚ·½°¸ B µÄÒÑ½âËø×´Ì¬
 )
 echo [36m******Ö´ĞĞ²Ù×÷
 echo ¡¾1¡¿Ñ¡Ôñ·½°¸½âËø Minecraft for Windows
@@ -73,17 +73,17 @@ echo [0m### ¿ªÊ¼·ÖÎöÊÊºÏµÄ½âËø·½°¸
 for /f "tokens=4-7 delims=[.] " %%i in ('ver') do @(if %%i==Version (set ver=%%j.%%k.%%l) else (set ver=%%i.%%j.%%k))
 echo µ±Ç°ÏµÍ³°æ±¾£º%ver%
 echo [36m### ½âËøÊ±ÓÃ·½°¸ A È¡Ïû½âËøÒ²±ØĞëÓÃ·½°¸ A£»½âËøÊ±ÓÃ·½°¸ B È¡Ïû½âËøÒ²±ØĞëÓÃ·½°¸ B¡£·½°¸ A ºÍ B Ö»ĞèÊ¹ÓÃÒ»¸ö£¬²»¿ÉÍ¬Ê±Ê¹ÓÃ¡£·ñÔò»áµ¼ÖÂÏµÍ³ÎÄ¼şËğ»µ£¡
-echo ### Ê¹ÓÃ·½°¸ A Çë×îºÃÈ·±£ÄúµÄÏµÍ³°æ±¾´óÓÚµÈÓÚ Windows10 1909£¨19H2/KB5004926/18362.446£©
-echo ### Ê¹ÓÃ·½°¸ A ²Ù×÷Ê±ĞèÒªÔİÊ±¹Ø±ÕÈ«²¿ Xbox¡¢Microsoft Store Ïà¹Ø²¿·Ö½ø³Ì£¬Çë×¢Òâ²»Òª¶ªÊ§¸öÈËÊı¾İ
+echo ### Ê¹ÓÃ·½°¸ A Çë×îºÃÈ·±£ÄúµÄÏµÍ³°æ±¾´óÓÚµÈÓÚ Windows10 1909
 echo ### Ê¹ÓÃ·½°¸ B Çë×îºÃÈ·±£ÄúµÄÏµÍ³²»ÊÇ¾«¼òÓÅ»¯°æ£¬·ñÔò¿ÉÄÜ»áµ¼ÖÂÏµÍ³À¶ÆÁµÈ¹ÊÕÏ
 echo ### Ê¹ÓÃ·½°¸ B »áµ¼ÖÂ Microsoft Store ÎŞ·¨ÏÂÔØÓ¦ÓÃ£¬Çë²Î¿¼°ïÖúĞÅÏ¢ÓëÏà¹ØÁ´½Ó
 echo ### Ê¹ÓÃ·½°¸ B Æô¶¯ Minecraft ĞèÒªÊÖ¶¯½áÊø RuntimeBroker.exe ½ø³Ì£¬»òÊ¹ÓÃ PlanB Launcher.bat Æô¶¯
 echo ### ¿ÉÒÔÊ¹ÓÃ PlanB UnlockLauncher.bat Æô¶¯ Minecraft£¬×Ô¶¯Ê¹ÓÃ·½°¸ B ½âËø²¢´¦ÀíÏà¹ØÎÊÌâ
-if %ver% GEQ 10.0.18362.446 (
-	echo ### µ±Ç°ÏµÍ³»·¾³½¨ÒéÊ¹ÓÃ·½°¸ A
+::https://support.microsoft.com/en-us/topic/january-12-2021-kb4598229-os-build-18363-1316-expired-2dcf5a0d-7e15-8e9e-7576-8abf3d810998
+if %ver% GEQ 10.0.18363.1316 (
+	echo *** µ±Ç°ÏµÍ³»·¾³½¨ÒéÊ¹ÓÃ·½°¸ A ½âËø
 ) else (
-	echo ### ÏµÍ³°æ±¾µÍÓÚ Windows10 1909£¨19H2/KB5004926/18362.446£©
-	echo ### µ±Ç°ÏµÍ³»·¾³½¨ÒéÊ¹ÓÃ·½°¸ B
+	echo ### ÏµÍ³°æ±¾µÍÓÚ Windows10 1909
+	echo *** µ±Ç°ÏµÍ³»·¾³½¨ÒéÊ¹ÓÃ·½°¸ B ½âËø
 )
 echo ¡¾a¡¿Ê¹ÓÃ·½°¸ A ½âËø£¨Ìæ»» DLL£©
 echo ¡¾b¡¿Ê¹ÓÃ·½°¸ B ½âËø£¨½ûÓÃ·şÎñ£©
@@ -111,10 +111,16 @@ if %bit%==64 (
 	icacls %windir%\System32\Windows.ApplicationModel.Store.dll /c /grant Administrators:F
 	echo ±¸·İÔ­ DLL...
 	rename %windir%\System32\Windows.ApplicationModel.Store.dll Windows.ApplicationModel.Store.dll.backup
-	echo Ìæ»»ĞÂ DLL...
-	copy /y .\aRes\x64\System32\Windows.ApplicationModel.Store.dll %windir%\System32\Windows.ApplicationModel.Store.dll
+	if ERRORLEVEL 1 (
+		echo [31m### ÎÄ¼ş²Ù×÷Ê§°Ü£¬¿ÉÄÜÊÇÒòÎªÎÄ¼ş±»ÆäËü³ÌĞòÕ¼ÓÃ£¨level%errorlevel%£©[0m
+	) else (
+		echo Ìæ»»ĞÂ DLL...
+		copy /y .\aRes\x64\System32\Windows.ApplicationModel.Store.dll %windir%\System32\Windows.ApplicationModel.Store.dll
+	)
 	echo »Ö¸´ÎÄ¼ş DACL ×´Ì¬...
 	icacls %windir%\System32 /restore %windir%\System32\Windows.ApplicationModel.Store.dll.temp && del /f %windir%\System32\Windows.ApplicationModel.Store.dll.temp
+	echo.
+	echo.
 	echo ¿ªÊ¼´¦Àí SysWOW64 DLL
 	echo ¼ÇÂ¼ÎÄ¼ş DACL ×´Ì¬...
 	icacls %windir%\SysWOW64\Windows.ApplicationModel.Store.dll /save %windir%\SysWOW64\Windows.ApplicationModel.Store.dll.temp
@@ -124,8 +130,12 @@ if %bit%==64 (
 	icacls %windir%\SysWOW64\Windows.ApplicationModel.Store.dll /c /grant Administrators:F
 	echo ±¸·İÔ­ DLL...
 	rename %windir%\SysWOW64\Windows.ApplicationModel.Store.dll Windows.ApplicationModel.Store.dll.backup
-	echo Ìæ»»ĞÂ DLL...
-	copy /y .\aRes\x64\SysWOW64\Windows.ApplicationModel.Store.dll %windir%\SysWOW64\Windows.ApplicationModel.Store.dll
+	if ERRORLEVEL 1 (
+		echo [31m### ÎÄ¼ş²Ù×÷Ê§°Ü£¬¿ÉÄÜÊÇÒòÎªÎÄ¼ş±»ÆäËü³ÌĞòÕ¼ÓÃ£¨level%errorlevel%£©[0m
+	) else (
+		echo Ìæ»»ĞÂ DLL...
+		copy /y .\aRes\x64\SysWOW64\Windows.ApplicationModel.Store.dll %windir%\SysWOW64\Windows.ApplicationModel.Store.dll
+	)
 	echo »Ö¸´ÎÄ¼ş DACL ×´Ì¬...
 	icacls %windir%\SysWOW64 /restore %windir%\SysWOW64\Windows.ApplicationModel.Store.dll.temp && del /f %windir%\SysWOW64\Windows.ApplicationModel.Store.dll.temp
 ) else (
@@ -138,12 +148,16 @@ if %bit%==64 (
 	icacls %windir%\System32\Windows.ApplicationModel.Store.dll /c /grant Administrators:F
 	echo ±¸·İÔ­ DLL...
 	rename %windir%\System32\Windows.ApplicationModel.Store.dll Windows.ApplicationModel.Store.dll.backup
-	echo Ìæ»»ĞÂ DLL...
-	copy /y .\aRes\x86\System32\Windows.ApplicationModel.Store.dll %windir%\System32\Windows.ApplicationModel.Store.dll
+	if ERRORLEVEL 1 (
+		echo [31m### ÎÄ¼ş²Ù×÷Ê§°Ü£¬¿ÉÄÜÊÇÒòÎªÎÄ¼ş±»ÆäËü³ÌĞòÕ¼ÓÃ£¨level%errorlevel%£©[0m
+	) else (
+		echo Ìæ»»ĞÂ DLL...
+		copy /y .\aRes\x86\System32\Windows.ApplicationModel.Store.dll %windir%\System32\Windows.ApplicationModel.Store.dll
+	)
 	echo »Ö¸´ÎÄ¼ş DACL ×´Ì¬...
 	icacls %windir%\System32 /restore %windir%\System32\Windows.ApplicationModel.Store.dll.temp && del /f %windir%\System32\Windows.ApplicationModel.Store.dll.temp
 )
-echo [32m### Minecraft for Windows10 ÒÑ½âËø
+echo [32m### Minecraft for Windows10 ½âËø²½ÖèÈ«²¿Íê³É
 goto Started
 
 ::½âËø·½°¸B - Ìí¼Ó×¢²á±í²¢Í£Ö¹·şÎñ
@@ -153,7 +167,7 @@ reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\ClipSVC\Parameters
 echo Í£Ö¹ ClipSVC ·şÎñ...
 net	stop ClipSVC
 if %errorlevel%==2 (echo [31m### ClipSVC ·şÎñÍ£Ö¹Ê§°Ü£¨level2 ¿ÉÄÜÊÇÒòÎª·şÎñ±¾¾ÍÎ´Æô¶¯£©) else if ERRORLEVEL 1 (echo [31m### ClipSVC ·şÎñÍ£Ö¹Ê§°Ü£¨level%errorlevel%£©)
-echo [32m### Minecraft for Windows10 ÒÑ½âËø
+echo [32m### Minecraft for Windows10 ½âËø²½ÖèÈ«²¿Íê³É
 goto Started
 
 
@@ -170,12 +184,12 @@ for  /f %%i in ('certutil -hashfile %windir%\SysWOW64\Windows.ApplicationModel.S
 	if %%i==92f46f5e11d1635ad48fee5c3d1b1632fcb5f549 set /a n+=1
 )
 echo [36m### ½âËøÊ±ÓÃ·½°¸ A È¡Ïû½âËøÒ²±ØĞëÓÃ·½°¸ A£»½âËøÊ±ÓÃ·½°¸ B È¡Ïû½âËøÒ²±ØĞëÓÃ·½°¸ B¡£·ñÔò»áµ¼ÖÂÏµÍ³ÎÄ¼şËğ»µ£¡
-if %n%==2 echo ### µ±Ç°ÏµÍ³»·¾³½¨ÒéÊ¹ÓÃ·½°¸ A
+if %n%==2 echo *** µ±Ç°ÏµÍ³»·¾³½¨ÒéÈ¡Ïû½âËø·½°¸ A
 for /f "tokens=3" %%i in ('reg query "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\ClipSVC\Parameters" /v "ServiceDll"') do (
-	if not %%i==C:\WINDOWS\System32\ClipSVC.dll echo ### µ±Ç°ÏµÍ³»·¾³½¨ÒéÊ¹ÓÃ·½°¸ B
+	if not %%i==C:\WINDOWS\System32\ClipSVC.dll echo *** µ±Ç°ÏµÍ³»·¾³½¨ÒéÈ¡Ïû½âËø·½°¸ B
 )
-echo ¡¾a¡¿Ê¹ÓÃ·½°¸ A È¡Ïû½âËø£¨Ìæ»» DLL£©
-echo ¡¾b¡¿Ê¹ÓÃ·½°¸ B È¡Ïû½âËø£¨½ûÓÃ·şÎñ£©
+echo ¡¾a¡¿È¡Ïû½âËø·½°¸ A£¨Ìæ»» DLL£©
+echo ¡¾b¡¿È¡Ïû½âËø·½°¸ B£¨½ûÓÃ·şÎñ£©
 choice /c ab /n /m "ÄãÏëÒªÖ´ĞĞµÄ²Ù×÷£º"
 if ERRORLEVEL 2 (
 	echo [0m### ¿ªÊ¼È¡Ïû½âËø Minecraft for Windows£¨·½°¸B£©
@@ -204,10 +218,14 @@ if %bit%==64 (
 		echo »Ö¸´±¸·İ DLL...
 		rename %windir%\System32\Windows.ApplicationModel.Store.dll.backup Windows.ApplicationModel.Store.dll
 	) else (
-		echo [31m### System32 DLL ±¸·İ²»´æÔÚ[0m
+		echo [31m### System32 DLL ±¸·İ²»´æÔÚ£¨¿ÉÄÜÊÇÒòÎª±¾¾ÍÃ»ÓĞÊ¹ÓÃ·½°¸ A ½âËø»ò½âËøÊ§°Ü£©[0m
+		echo ³¢ÊÔÊ¹ÓÃ Windows SFC ¹¤¾ßĞŞ¸´ DLL ÎÄ¼ş...
+		sfc /scanfile=%windir%\System32\Windows.ApplicationModel.Store.dll
 	)
 	echo »Ö¸´ÎÄ¼ş DACL ×´Ì¬...
 	icacls %windir%\System32 /restore %windir%\System32\Windows.ApplicationModel.Store.dll.temp && del /f %windir%\System32\Windows.ApplicationModel.Store.dll.temp
+	echo.
+	echo.
 	echo ¿ªÊ¼´¦Àí SysWOW64 DLL
 	echo ¼ÇÂ¼ÎÄ¼ş DACL ×´Ì¬...
 	icacls %windir%\SysWOW64\Windows.ApplicationModel.Store.dll /save %windir%\SysWOW64\Windows.ApplicationModel.Store.dll.temp
@@ -221,7 +239,9 @@ if %bit%==64 (
 		echo »Ö¸´±¸·İ DLL...
 		rename %windir%\SysWOW64\Windows.ApplicationModel.Store.dll.backup Windows.ApplicationModel.Store.dll
 	) else (
-		echo [31m### SysWOW64 DLL ±¸·İ²»´æÔÚ[0m
+		echo [31m### SysWOW64 DLL ±¸·İ²»´æÔÚ£¨¿ÉÄÜÊÇÒòÎª±¾¾ÍÃ»ÓĞÊ¹ÓÃ·½°¸ A ½âËø»ò½âËøÊ§°Ü£©[0m
+		echo ³¢ÊÔÊ¹ÓÃ Windows SFC ¹¤¾ßĞŞ¸´ DLL ÎÄ¼ş...
+		sfc /scanfile=%windir%\SysWOW64\Windows.ApplicationModel.Store.dll
 	)
 	echo »Ö¸´ÎÄ¼ş DACL ×´Ì¬...
 	icacls %windir%\SysWOW64 /restore %windir%\SysWOW64\Windows.ApplicationModel.Store.dll.temp && del /f %windir%\SysWOW64\Windows.ApplicationModel.Store.dll.temp
@@ -238,11 +258,15 @@ if %bit%==64 (
 		del /f %windir%\System32\Windows.ApplicationModel.Store.dll
 		echo »Ö¸´±¸·İ DLL...
 		rename %windir%\System32\Windows.ApplicationModel.Store.dll.backup Windows.ApplicationModel.Store.dll
+	) else (
+		echo [31m### System32 DLL ±¸·İ²»´æÔÚ£¨¿ÉÄÜÊÇÒòÎª±¾¾ÍÃ»ÓĞÊ¹ÓÃ·½°¸ A ½âËø»ò½âËøÊ§°Ü£©[0m
+		echo ³¢ÊÔÊ¹ÓÃ Windows SFC ¹¤¾ßĞŞ¸´ DLL ÎÄ¼ş...
+		sfc /scanfile=%windir%\System32\Windows.ApplicationModel.Store.dll
 	)
 	echo »Ö¸´ÎÄ¼ş DACL ×´Ì¬...
 	icacls %windir%\System32 /restore %windir%\System32\Windows.ApplicationModel.Store.dll.temp && del /f %windir%\System32\Windows.ApplicationModel.Store.dll.temp
 )
-echo [32m### Minecraft for Windows ÒÑÈ¡Ïû½âËø£¨»Ö¸´Ô­Ñù£©
+echo [32m### Minecraft for Windows È¡Ïû½âËø£¨»Ö¸´Ô­Ñù£©²½ÖèÈ«²¿Íê³É
 goto Started
 
 ::È¡Ïû½âËø·½°¸B - Ìí¼Ó×¢²á±í²¢Æô¶¯·şÎñ
@@ -252,7 +276,7 @@ reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\ClipSVC\Parameters
 echo Æô¶¯ ClipSVC ·şÎñ...
 net	start ClipSVC
 if %errorlevel%==2 (echo [31m### ClipSVC ·şÎñÆô¶¯Ê§°Ü£¨level2 ¿ÉÄÜÊÇÒòÎª·şÎñ±¾¾ÍÒÑÆô¶¯£©) else if ERRORLEVEL 1 (echo [31m### ClipSVC ·şÎñÆô¶¯Ê§°Ü£¨level%serviceError%£©)
-echo [32m### Minecraft for Windows ÒÑÈ¡Ïû½âËø£¨»Ö¸´Ô­Ñù£©
+echo [32m### Minecraft for Windows È¡Ïû½âËø£¨»Ö¸´Ô­Ñù£©²½ÖèÈ«²¿Íê³É
 goto Started
 
 :Help
