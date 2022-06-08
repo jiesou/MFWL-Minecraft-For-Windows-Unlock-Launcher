@@ -1,22 +1,22 @@
 @echo off
 cd /d "%~dp0"
-::Æô¶¯ËµÃ÷
+::å¯åŠ¨è¯´æ˜Ž
 title MFWL
 echo [36m****** MINECRAFT FOR WINDOWS MINECRAFT FOR WINDOWS PLAN B LAUNCHER
-echo ¸Ã½Å±¾½«×Ô¶¯´ò¿ª Minecraft for Windows10 ²¢½áÊø RuntimeBroker.exe ½ø³Ì 
-echo ÇëÈ·±£ÄúÒÑ¾­°²×°ÁË Minecraft for Windows£¨¿ÉÒÔÊÇÊÔÓÃ°æ£©
-echo ×îºÃÈ·±£ÏµÍ³²»ÊÇ¾«¼òÓÅ»¯°æÇÒÏµÍ³°æ±¾´óÓÚµÈÓÚ Windows10 1909
-echo Ïà¹Ø·½·¨Ô­ÀíÀ´×ÔÍøÂç£¬±¾½Å±¾ÓÉ jiecs_23 ÖÆ×÷
-::¼ì²â»·¾³
+echo è¯¥è„šæœ¬å°†è‡ªåŠ¨æ‰“å¼€ Minecraft for Windows10 å¹¶ç»“æŸ RuntimeBroker.exe è¿›ç¨‹ 
+echo è¯·ç¡®ä¿æ‚¨å·²ç»å®‰è£…äº† Minecraft for Windowsï¼ˆå¯ä»¥æ˜¯è¯•ç”¨ç‰ˆï¼‰
+echo æœ€å¥½ç¡®ä¿ç³»ç»Ÿä¸æ˜¯ç²¾ç®€ä¼˜åŒ–ç‰ˆä¸”ç³»ç»Ÿç‰ˆæœ¬å¤§äºŽç­‰äºŽ Windows10 1909
+echo ç›¸å…³æ–¹æ³•åŽŸç†æ¥è‡ªç½‘ç»œï¼Œæœ¬è„šæœ¬ç”± jiecs_23 åˆ¶ä½œ
+::æ£€æµ‹çŽ¯å¢ƒ
 echo.
-echo [0mµ±Ç°ÔËÐÐÂ·¾¶£º%CD%
-echo [0m¼ì²é Minecraft for Windows ×´Ì¬...
+echo [0må½“å‰è¿è¡Œè·¯å¾„ï¼š%CD%
+echo [0mæ£€æŸ¥ Minecraft for Windows çŠ¶æ€...
 tasklist |find /i "Minecraft.Windows.exe"
 if ERRORLEVEL 1 goto mcOK
-echo [36m******´íÎó£¡Minecraft for Windows10 ÕýÔÚÔËÐÐ£¬²»ÄÜÍ¬Ê±ÔËÐÐ¶à¸öÊµÀý
-echo ¡¾1¡¿Ç¿ÖÆ¹Ø±Õ Minecraft for Windows10 ²¢¼ÌÐø
-echo ¡¾2¡¿Ìø¹ý¼ì²â×´Ì¬²¢¼ÌÐø
-choice /c 12 /n /m "ÄãÏëÒªÖ´ÐÐµÄ²Ù×÷£º"
+echo [36m******é”™è¯¯ï¼Minecraft for Windows10 æ­£åœ¨è¿è¡Œï¼Œä¸èƒ½åŒæ—¶è¿è¡Œå¤šä¸ªå®žä¾‹
+echo ã€1ã€‘å¼ºåˆ¶å…³é—­ Minecraft for Windows10 å¹¶ç»§ç»­
+echo ã€2ã€‘è·³è¿‡æ£€æµ‹çŠ¶æ€å¹¶ç»§ç»­
+choice /c 12 /n /m "ä½ æƒ³è¦æ‰§è¡Œçš„æ“ä½œï¼š"
 if ERRORLEVEL 2 goto Unlock
 if ERRORLEVEL 1 (
 	echo [0m
@@ -26,30 +26,30 @@ if ERRORLEVEL 1 (
 )
 :mcOK
 
-::Æô¶¯Minecraft
-echo ### ³¢ÊÔÆô¶¯ Minecraft for Windows
+::å¯åŠ¨Minecraft
+echo ### å°è¯•å¯åŠ¨ Minecraft for Windows
 start Minecraft:
 timeout /nobreak /t 3
 set num=1
 tasklist|find /i "Minecraft.Windows.exe"
 if not ERRORLEVEL 1 (
-	echo [32m### Minecraft for Windows10 ÒÑ³É¹¦Æô¶¯[0m
+	echo [32m### Minecraft for Windows10 å·²æˆåŠŸå¯åŠ¨[0m
 	goto Loop
 )
-echo [36m******´íÎó£¡Minecraft for Windows10 Ó¦µ±Æô¶¯£¬µ«ÒòÎ´ÖªÔ­ÒòÎ´Æô¶¯
-echo ÇëÈ·±£ÄúÒÑ¾­°²×°ÁË Minecraft for Windows£¨¿ÉÒÔÊÇÊÔÓÃ°æ£©
-echo ¡¾1¡¿ÖØÐÂ³¢ÊÔÆô¶¯ Minecraft for Windows10 ²¢²»ÔÙ¼ì²âÆä×´Ì¬
-echo ¡¾2¡¿Ìø¹ý¼ì²â×´Ì¬²¢¼ÌÐø
-choice /c 12 /n /m "ÄãÏëÒªÖ´ÐÐµÄ²Ù×÷£º"
+echo [36m******é”™è¯¯ï¼Minecraft for Windows10 åº”å½“å¯åŠ¨ï¼Œä½†å› æœªçŸ¥åŽŸå› æœªå¯åŠ¨
+echo è¯·ç¡®ä¿æ‚¨å·²ç»å®‰è£…äº† Minecraft for Windowsï¼ˆå¯ä»¥æ˜¯è¯•ç”¨ç‰ˆï¼‰
+echo ã€1ã€‘é‡æ–°å°è¯•å¯åŠ¨ Minecraft for Windows10 å¹¶ä¸å†æ£€æµ‹å…¶çŠ¶æ€
+echo ã€2ã€‘è·³è¿‡æ£€æµ‹çŠ¶æ€å¹¶ç»§ç»­
+choice /c 12 /n /m "ä½ æƒ³è¦æ‰§è¡Œçš„æ“ä½œï¼š"
 if ERRORLEVEL 2 goto Loop
 if ERRORLEVEL 1 (
-	call Minecraft.lnk
+	start Minecraft:
 	timeout /nobreak /t 3
 	echo [0m
 	goto Loop
 )
 
-::Ñ­»·½áÊø RuntimeBroker.exe ½ø³Ì
+::å¾ªçŽ¯ç»“æŸ RuntimeBroker.exe è¿›ç¨‹
 :Loop
 tasklist|find "Minecraft.Windows.exe" >nul || exit
 for /f "tokens=3" %%i in ('tasklist /nh /apps /fi "IMAGENAME eq RuntimeBroker.exe"^|find "Microsoft.MinecraftUWP"') do @taskkill /pid %%i /f
